@@ -15,13 +15,27 @@ class ChatClient():
 
     def receivemessage(self):
         while True:
-            readline, writelist, errorlist = select.select(self.client_readline, [], [])
+            readlist, writelist, errorlist = select.select(self.client_readlist, [], [])
             if self.client_socket in readlist:
                 try:
                     print(self.client_socket.recv(4096).decode('utf-8'))
                 except socket.error as err:
                     print('连接错误...')
                     exit()
+
+    def sendmessage(self):
+        while True:
+            try:
+                data = input()
+            except Exception as e:
+                print('对不起，因为连接错误暂时无法输入信息.')
+                break
+
+            try:
+                self.client_socket.send(data.encode('utf-8'))
+            except Exception as e:
+                exit()
+                                                    
 
     def run(self):
         thread_recievemsg = threading.Thread(target = self.receivemessage)
