@@ -31,7 +31,7 @@ class ChatServer():
 
             for sock in self.client_names.keys():
                 if (not sock == client_conn):
-                    msg = self.client_name[client_conn] + ' 加入聊天室 '
+                    msg = self.client_names[client_conn] + ' 加入聊天室 '
                     sock.send(msg.encode('utf-8'))
                     
         except Exception as e:
@@ -83,7 +83,7 @@ class ChatServer():
                             except Exception as e:
                                 print(e)
 
-                    del self.client_names[client_socket]
+                    #del self.client_names[client_socket]
 
                 else:
                     print(data)

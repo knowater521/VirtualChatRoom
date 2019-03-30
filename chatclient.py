@@ -18,7 +18,8 @@ class ChatClient():
             readlist, writelist, errorlist = select.select(self.client_readlist, [], [])
             if self.client_socket in readlist:
                 try:
-                    print(self.client_socket.recv(4096).decode('utf-8'))
+                    recvmsg = self.client_socket.recv(4096).decode('utf-8')
+                    print(recvmsg)
                 except socket.error as err:
                     print('连接错误...')
                     exit()
